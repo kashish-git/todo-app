@@ -1,0 +1,9 @@
+docker-build:
+  image: docker:latest
+  stage: build
+  before_script:
+    - checkout
+    - docker login -u "${DOCKER_USERNAME}" -P "${DOCKER_PASSWORD}"
+  script:
+    - docker tag "${DOCKER_USERNAME}/todo-app:${CI_JOB_ID}"
+    - docker push
